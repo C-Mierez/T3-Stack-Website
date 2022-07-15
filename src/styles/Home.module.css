@@ -1,0 +1,30 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 100%;
+
+    padding: var(--padding-global);
+}
+
+.options {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 1rem;
+    margin-top: var(--padding-global);
+    padding: var(--padding-global);
+    border-radius: 0.4rem;
+
+    border: solid 2px var(--c-neutral-500);
+}
+
+.option {
+    background-color: var(--c-neutral-500);
+    width: 4rem;
+    height: 4rem;
+}

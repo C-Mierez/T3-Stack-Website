@@ -1,0 +1,45 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    position: sticky;
+    top: 0;
+    height: 8vh;
+    width: 100%;
+    padding: var(--padding-global);
+
+    background-color: var(--c-neutral-900);
+}
+
+.header .title {
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.header button {
+    cursor: pointer;
+
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+
+    background-color: var(--c-neutral-800);
+    color: var(--c-neutral-100);
+
+    transition: background-color 0.2s ease-in-out;
+}
+
+.header button:hover {
+    background-color: var(--c-primary-600);
+}
+
+.header .auth {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+
+    margin-left: auto;
+}
