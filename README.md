@@ -33,3 +33,10 @@ Currently using:
 - Animations introducing the game
 - Animations introducing the options
 
+### Some stuff learnt:
+
+- Computing an initial state from random values can be tricky, and a decision must be made on how to handle this depending on whether SSR or CSR is being used. 
+
+  In the case of `index.tsx` the page must begin with two random values. There were two approaches that were considered and got the job done:
+  - Using `getServerSideProps` to calculate the initial values on the server before client rendering.
+  - Using a combination of `useState` and `useEffect` to calculate wether the site `isMounted` on the client, and then use `useMemo` to calculate the random values only when on the client side.
