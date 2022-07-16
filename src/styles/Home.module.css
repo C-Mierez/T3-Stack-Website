@@ -22,7 +22,7 @@
     /* height: 80vh; */
     width: 80%;
 
-    border: solid 2px var(--c-neutral-500);
+    /* border: solid 2px var(--c-neutral-500); */
 }
 
 .option {
@@ -34,12 +34,15 @@
     height: 100%;
     width: 100%;
 
-    transition: outline 100ms;
+    box-shadow: 0 0 1.5rem -0.3rem var(--c-neutral-100);
+
+    transition: 100ms;
 }
 
 .options .option:hover {
     cursor: pointer;
     outline: solid 0.5rem var(--c-neutral-100);
+    box-shadow: 0 0 1rem 0.5rem var(--c-neutral-100);
 }
 .options > :not(.option) {
     font-size: 2.5rem;
