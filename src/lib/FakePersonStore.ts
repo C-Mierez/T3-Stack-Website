@@ -1,4 +1,5 @@
 import { FakePerson } from "../models/FakePerson";
+import { prisma } from "../server/db/client";
 
 export async function fetchRandomPerson(): Promise<FakePerson> {
     const person = await (
@@ -37,4 +38,18 @@ export async function fetchRandomName(gender?: string): Promise<string> {
     const formattedName = name[0].replace("_", " ");
 
     return formattedName;
+}
+
+export async function castPersonVote(
+    votedFor: string,
+    votedAgainst: string
+): Promise<boolean> {
+    const vote = await prisma.vote.create({
+        data: {
+            votedFor,
+            votedAgainst,
+        },
+    });
+
+    return true;
 }
