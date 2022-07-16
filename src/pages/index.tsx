@@ -1,16 +1,36 @@
-import type { NextPage } from "next";
-import { useSession } from "next-auth/react";
+import type {
+    GetServerSideProps,
+    InferGetServerSidePropsType,
+    NextPage,
+} from "next";
 import Head from "next/head";
 import css from "../styles/Home.module.css";
+import { getVotePeopleIds } from "../utils/randomPerson";
 import { trpc } from "../utils/trpc";
 
-const Home: NextPage = () => {
-    const { data, isLoading } = trpc.useQuery([
-        "example.hello",
-        { text: "from tRPC" },
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    return {
+        props: {
+            peopleIds: getVotePeopleIds(),
+        },
+    };
+};
+
+const Home: NextPage = ({
+    peopleIds,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+    const personA = trpc.useQuery([
+        "person.get-person-by-id",
+        { id: peopleIds[0] },
+    ]);
+    const personB = trpc.useQuery([
+        "person.get-person-by-id",
+        { id: peopleIds[1] },
     ]);
 
-    const { data: session } = useSession();
+    console.log("Rendered");
+
+    const isLoading = personA.isLoading || personB.isLoading;
 
     return (
         <>
@@ -21,14 +41,58 @@ const Home: NextPage = () => {
             </Head>
             <div className={css.main}>
                 <h3>{"Would thou dare ...?"}</h3>
-                <div className={css.options}>
-                    <div className={css.option}></div>
-                    <div>vs</div>
-                    <div className={css.option}></div>
-                </div>
+                {isLoading ? (
+                    <div>Loading...</div>
+                ) : (
+                    <div className={css.options}>
+                        <div className={css.option}>
+                            <img src={personA.data?.imageUrl}></img>
+                            <div>{personA.data?.name}</div>
+                        </div>
+                        <div>vs</div>
+                        <div className={css.option}>
+                            <img src={personB.data?.imageUrl}></img>
+                            <div>{personB.data?.name}</div>
+                        </div>
+                    </div>
+                )}
+                <button onClick={() => {}}>Click</button>
             </div>
         </>
     );
 };
 
 export default Home;
+
+/*
+
+const [res, setRes] = useState();
+
+    const doTheFetch = async () => {
+        // setRes(
+        //     await (
+        //         await fetch("https://would-you-rather-api.abaanshanid.repl.co/")
+        //     ).json()
+        // );
+        const options = {
+            method: "GET",
+            headers: {
+                "X-RapidAPI-Key":
+                    "f25f96ecf8msh4d738bf30abb9bfp15f526jsn570b4c52f2ad",
+                "X-RapidAPI-Host": "socialgrep.p.rapidapi.com",
+            },
+        };
+
+        fetch(
+            "https://socialgrep.p.rapidapi.com/search/posts?query=%2Fr%2FWouldYouRather%2Cor",
+            options
+        )
+            .then((response) => response.json())
+            .then((response) => console.log(response))
+            .catch((err) => console.error(err));
+    };
+
+    useEffect(() => {
+        doTheFetch();
+    }, []);
+*/
