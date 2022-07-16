@@ -11,6 +11,7 @@ export const VoteOptions: React.FC<{
     const { peopleIds, onClickA, onClickB } = props;
 
     const options = trpc.useQuery(["fakePerson.get-random-people-options"]);
+    const voteMutation = trpc.useMutation(["fakePerson.cast-vote"]);
 
     console.log("Rendered VoteOptions");
 
@@ -26,6 +27,10 @@ export const VoteOptions: React.FC<{
                     }
                     onClick={() => {
                         onClickA();
+                        voteMutation.mutate({
+                            votedFor: personA!.id,
+                            votedAgainst: personB!.id,
+                        });
                         options.refetch();
                     }}
                 >
@@ -45,6 +50,10 @@ export const VoteOptions: React.FC<{
                     }
                     onClick={() => {
                         onClickB();
+                        voteMutation.mutate({
+                            votedFor: personB!.id,
+                            votedAgainst: personA!.id,
+                        });
                         options.refetch();
                     }}
                 >
