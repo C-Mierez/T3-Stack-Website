@@ -47,16 +47,15 @@ const Home: NextPage = ({
                     <div className={css.options}>
                         <div className={css.option}>
                             <img src={personA.data?.imageUrl}></img>
-                            <div>{personA.data?.name}</div>
+                            <div className={css.name}>{personA.data?.name}</div>
                         </div>
                         <div>vs</div>
                         <div className={css.option}>
                             <img src={personB.data?.imageUrl}></img>
-                            <div>{personB.data?.name}</div>
+                            <div className={css.name}>{personB.data?.name}</div>
                         </div>
                     </div>
                 )}
-                <button onClick={() => {}}>Click</button>
             </div>
         </>
     );
