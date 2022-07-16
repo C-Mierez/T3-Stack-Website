@@ -1,4 +1,4 @@
-export interface Person {
+export interface FakePerson {
     id: string;
     name: string;
     gender: string;
