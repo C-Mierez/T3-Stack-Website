@@ -39,7 +39,11 @@
     transition: 100ms;
 }
 
-.options .option:hover {
+.option.loading {
+    box-shadow: none;
+}
+
+.options .option:hover:not(.loading) {
     cursor: pointer;
     outline: solid 0.5rem var(--c-neutral-100);
     box-shadow: 0 0 1rem 0.5rem var(--c-neutral-100);
@@ -64,4 +68,14 @@
     font-size: 1.6rem;
     font-weight: bold;
     text-shadow: 0 0 0.5rem black;
+}
+
+.option .loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    aspect-ratio: 1;
+    width: 100%;
 }
