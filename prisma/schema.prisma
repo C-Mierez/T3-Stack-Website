@@ -6,9 +6,8 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
-    url      = "file:./db.sqlite"
-    // url      = env("DATABASE_URL")
+    provider = "cockroachdb"
+    url      = env("DATABASE_URL")
 }
 
 model Example {
@@ -58,4 +57,15 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+// Voting
+
+model Vote {
+    id           String   @id @default(cuid())
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @default(now())
+    votedFor     String
+    votedAgainst String
+    // TODO Add a relationship with User
 }
