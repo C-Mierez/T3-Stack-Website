@@ -6,7 +6,7 @@ export default function Header() {
 
     return (
         <div className={css.header}>
-            <div className={css.title}>{"'Lest, thou dare? 😳"}</div>
+            <div className={css.title}>{"'Lest, thou crave? 😳"}</div>
             <div className={css.auth}>
                 {session ? (
                     <>
